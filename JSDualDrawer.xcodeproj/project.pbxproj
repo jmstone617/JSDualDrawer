@@ -18,6 +18,9 @@
 		CB6FDDDF177A07470075C3A8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6FDDDE177A07470075C3A8 /* Default-568h@2x.png */; };
 		CB6FDDE2177A07470075C3A8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB6FDDE0177A07470075C3A8 /* MainStoryboard.storyboard */; };
 		CB6FDDE5177A07470075C3A8 /* JSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6FDDE4177A07470075C3A8 /* JSViewController.m */; };
+		CB6FDDED177A08050075C3A8 /* JSDualDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6FDDEC177A08050075C3A8 /* JSDualDrawerViewController.m */; };
+		CB6FDDF2177A1E4E0075C3A8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB6FDDF1177A1E4E0075C3A8 /* QuartzCore.framework */; };
+		CB6FDDF5177A223E0075C3A8 /* JSSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6FDDF4177A223E0075C3A8 /* JSSecondViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,11 @@
 		CB6FDDE1177A07470075C3A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		CB6FDDE3177A07470075C3A8 /* JSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSViewController.h; sourceTree = "<group>"; };
 		CB6FDDE4177A07470075C3A8 /* JSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSViewController.m; sourceTree = "<group>"; };
+		CB6FDDEB177A08050075C3A8 /* JSDualDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDualDrawerViewController.h; sourceTree = "<group>"; };
+		CB6FDDEC177A08050075C3A8 /* JSDualDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDualDrawerViewController.m; sourceTree = "<group>"; };
+		CB6FDDF1177A1E4E0075C3A8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CB6FDDF3177A223E0075C3A8 /* JSSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSecondViewController.h; sourceTree = "<group>"; };
+		CB6FDDF4177A223E0075C3A8 /* JSSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSecondViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB6FDDF2177A1E4E0075C3A8 /* QuartzCore.framework in Frameworks */,
 				CB6FDDC9177A07470075C3A8 /* UIKit.framework in Frameworks */,
 				CB6FDDCB177A07470075C3A8 /* Foundation.framework in Frameworks */,
 				CB6FDDCD177A07470075C3A8 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +82,7 @@
 		CB6FDDC7177A07470075C3A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB6FDDF1177A1E4E0075C3A8 /* QuartzCore.framework */,
 				CB6FDDC8177A07470075C3A8 /* UIKit.framework */,
 				CB6FDDCA177A07470075C3A8 /* Foundation.framework */,
 				CB6FDDCC177A07470075C3A8 /* CoreGraphics.framework */,
@@ -88,6 +98,10 @@
 				CB6FDDE0177A07470075C3A8 /* MainStoryboard.storyboard */,
 				CB6FDDE3177A07470075C3A8 /* JSViewController.h */,
 				CB6FDDE4177A07470075C3A8 /* JSViewController.m */,
+				CB6FDDEB177A08050075C3A8 /* JSDualDrawerViewController.h */,
+				CB6FDDEC177A08050075C3A8 /* JSDualDrawerViewController.m */,
+				CB6FDDF3177A223E0075C3A8 /* JSSecondViewController.h */,
+				CB6FDDF4177A223E0075C3A8 /* JSSecondViewController.m */,
 				CB6FDDCF177A07470075C3A8 /* Supporting Files */,
 			);
 			path = JSDualDrawer;
@@ -177,6 +191,8 @@
 				CB6FDDD5177A07470075C3A8 /* main.m in Sources */,
 				CB6FDDD9177A07470075C3A8 /* JSAppDelegate.m in Sources */,
 				CB6FDDE5177A07470075C3A8 /* JSViewController.m in Sources */,
+				CB6FDDED177A08050075C3A8 /* JSDualDrawerViewController.m in Sources */,
+				CB6FDDF5177A223E0075C3A8 /* JSSecondViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

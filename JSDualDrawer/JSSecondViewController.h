@@ -1,5 +1,5 @@
 //
-//  JSAppDelegate.h
+//  JSSecondViewController.h
 //  JSDualDrawer
 //
 //  Created by Jordan Stone on 6/25/13.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JSAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface JSSecondViewController : UIViewController
 
 @end

@@ -2,17 +2,29 @@
 //  JSAppDelegate.m
 //  JSDualDrawer
 //
-//  Created by Stone, Jordan Matthew (US - Denver) on 6/25/13.
+//  Created by Jordan Stone on 6/25/13.
 //  Copyright (c) 2013 Jordan Stone. All rights reserved.
 //
 
 #import "JSAppDelegate.h"
+#import "JSDualDrawerViewController.h"
 
 @implementation JSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
+    JSDualDrawerViewController *containerVC = [JSDualDrawerViewController sharedDrawerController];
+    
+    UIViewController *firstVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    UIViewController *secondVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"SecondViewController"];
+    
+    [containerVC addViewControllers:@[firstVC, secondVC]];
+    
+    [self.window setRootViewController:containerVC];
+    
     return YES;
 }
 							

@@ -2,7 +2,7 @@
 //  JSViewController.h
 //  JSDualDrawer
 //
-//  Created by Stone, Jordan Matthew (US - Denver) on 6/25/13.
+//  Created by Jordan Stone on 6/25/13.
 //  Copyright (c) 2013 Jordan Stone. All rights reserved.
 //
 
