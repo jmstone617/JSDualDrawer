@@ -5,17 +5,24 @@ A dual drawer containment view controller similar to Facebook or Path
 
 JSDualDrawer is very simple to use! See the Xcode project for an example. The gist is as follows:
 
-Initialize JSDualDrawerContainerViewController using the singleton class method:
-JSDualDrawerViewController *containerVC = [JSDualDrawerViewController sharedDrawerController];
+Initialize `JSDualDrawerContainerViewController` using the singleton class method:
 
-Then, as you would with a UITabBarController, initialize your view controllers and add them to the drawer view controller:
- UIViewController *firstVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    UIViewController *secondVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"SecondViewController"];
-    
-    [containerVC addViewControllers:@[firstVC, secondVC]];
+    JSDualDrawerViewController *containerVC = [JSDualDrawerViewController sharedDrawerController];
+
+Then, as you would with a `UITabBarController`, initialize your view controllers and add them to the drawer view controller:
+
+```objc
+UIViewController *firstVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+UIViewController *secondVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"SecondViewController"];
+
+[containerVC addViewControllers:@[firstVC, secondVC]];
+```
     
 Finally, set the container view controller as the root view controller of the main window:
+
+```objc
 [self.window setRootViewController:containerVC];
+```
 
 And that's it! Lay out your view controllers in .xibs or a storyboard, and everything else is taken care of for you.
 
