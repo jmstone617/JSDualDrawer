@@ -129,27 +129,27 @@
         [self.leftTableView setHidden:NO];
         [self.rightTableView setHidden:YES];
         
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPathMoveToPoint(path, NULL, 0, 0);
+        CGPathAddLineToPoint(path, NULL, -1, 0);
+        CGPathAddLineToPoint(path, NULL, -1, CGRectGetHeight(self.currentNavigationController.view.frame));
+        CGPathAddLineToPoint(path, NULL, 0, CGRectGetHeight(self.currentNavigationController.view.frame));
+        CGPathCloseSubpath(path);
+        
+        [self.currentNavigationController.view.layer setShadowPath:path];
+        [self.currentNavigationController.view.layer setShadowColor:[UIColor blackColor].CGColor];
+        [self.currentNavigationController.view.layer setShadowOpacity:1.0];
+        [self.currentNavigationController.view.layer setShadowOffset:CGSizeMake(0.0, -3.0)];
+        
+        CGPathRelease(path);
+        
         [UIView animateWithDuration:0.3 animations:^{
             [self.currentNavigationController.view setFrame:CGRectMake(homeBaseFrame.origin.x + kOpenDrawerOffset, homeBaseFrame.origin.y, homeBaseFrame.size.width, homeBaseFrame.size.height)];
-            
-            CGMutablePathRef path = CGPathCreateMutable();
-            CGPathMoveToPoint(path, NULL, 0, 0);
-            CGPathAddLineToPoint(path, NULL, -1, 0);
-            CGPathAddLineToPoint(path, NULL, -1, CGRectGetHeight(self.currentNavigationController.view.frame));
-            CGPathAddLineToPoint(path, NULL, 0, CGRectGetHeight(self.currentNavigationController.view.frame));
-            CGPathCloseSubpath(path);
-            
-            [self.currentNavigationController.view.layer setShadowPath:path];
-            [self.currentNavigationController.view.layer setShadowColor:[UIColor blackColor].CGColor];
-            [self.currentNavigationController.view.layer setShadowOpacity:1.0];
-            [self.currentNavigationController.view.layer setShadowOffset:CGSizeMake(0.0, -3.0)];
         }];
     }
     else {
         [UIView animateWithDuration:0.3 animations:^{
             [self.currentNavigationController.view setFrame:homeBaseFrame];
-            
-            [self.currentNavigationController.view.layer setShadowPath:nil];
         }];
     }
     
@@ -163,27 +163,27 @@
         [self.leftTableView setHidden:YES];
         [self.rightTableView setHidden:NO];
         
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPathMoveToPoint(path, NULL, homeBaseFrame.size.width, 0);
+        CGPathAddLineToPoint(path, NULL, homeBaseFrame.size.width + 1, 0);
+        CGPathAddLineToPoint(path, NULL, homeBaseFrame.size.width + 1, CGRectGetHeight(self.currentNavigationController.view.frame));
+        CGPathAddLineToPoint(path, NULL, 0, CGRectGetHeight(self.currentNavigationController.view.frame));
+        CGPathCloseSubpath(path);
+        
+        [self.currentNavigationController.view.layer setShadowPath:path];
+        [self.currentNavigationController.view.layer setShadowColor:[UIColor blackColor].CGColor];
+        [self.currentNavigationController.view.layer setShadowOpacity:1.0];
+        [self.currentNavigationController.view.layer setShadowOffset:CGSizeMake(-1.0, -3.0)];
+        
+        CGPathRelease(path);
+        
         [UIView animateWithDuration:0.3 animations:^{
             [self.currentNavigationController.view setFrame:CGRectMake(homeBaseFrame.origin.x - kOpenDrawerOffset, homeBaseFrame.origin.y, homeBaseFrame.size.width, homeBaseFrame.size.height)];
-            
-            CGMutablePathRef path = CGPathCreateMutable();
-            CGPathMoveToPoint(path, NULL, homeBaseFrame.size.width, 0);
-            CGPathAddLineToPoint(path, NULL, homeBaseFrame.size.width + 1, 0);
-            CGPathAddLineToPoint(path, NULL, homeBaseFrame.size.width + 1, CGRectGetHeight(self.currentNavigationController.view.frame));
-            CGPathAddLineToPoint(path, NULL, 0, CGRectGetHeight(self.currentNavigationController.view.frame));
-            CGPathCloseSubpath(path);
-            
-            [self.currentNavigationController.view.layer setShadowPath:path];
-            [self.currentNavigationController.view.layer setShadowColor:[UIColor blackColor].CGColor];
-            [self.currentNavigationController.view.layer setShadowOpacity:1.0];
-            [self.currentNavigationController.view.layer setShadowOffset:CGSizeMake(-1.0, -3.0)];
         }];
     }
     else {
         [UIView animateWithDuration:0.3 animations:^{
             [self.currentNavigationController.view setFrame:homeBaseFrame];
-            
-            [self.currentNavigationController.view.layer setShadowPath:nil];
         }];
     }
     
