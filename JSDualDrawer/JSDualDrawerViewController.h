@@ -32,13 +32,32 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, JSDualDrawerNumberOfDrawers) {
+    JSDualDrawerNumberOfDrawersOne,
+    JSDualDrawerNumberOfDrawersTwo
+};
+
+typedef NS_ENUM(NSUInteger, JSDualDrawerOpenDrawerDirection) {
+    JSDualDrawerOpenDrawerDirectionFromSide,
+    JSDualDrawerOpenDrawerDirectionFromTop,
+    JSDualDrawerOpenDrawerDirectionFromBottom
+};
+
 @interface JSDualDrawerViewController : UIViewController
 
 @property (nonatomic, strong, readonly) NSArray *viewControllers;
 @property (nonatomic, strong) UIViewController *topViewController;
+@property (nonatomic) JSDualDrawerOpenDrawerDirection openDrawerDirection;
+@property (nonatomic) JSDualDrawerNumberOfDrawers numberOfDrawers;
 
-+ (JSDualDrawerViewController *)sharedDrawerController;
+- (id)initWithNumberOfDrawers:(JSDualDrawerNumberOfDrawers)numberOfDrawers openDirection:(JSDualDrawerOpenDrawerDirection)openDirection;
 
 - (void)addViewControllers:(NSArray *)viewControllers;
+
+@end
+
+@interface UIViewController (JSDualDrawerViewController)
+
+- (JSDualDrawerViewController *)dualDrawerController;
 
 @end

@@ -40,7 +40,7 @@
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
-    JSDualDrawerViewController *containerVC = [JSDualDrawerViewController sharedDrawerController];
+    JSDualDrawerViewController *containerVC = [[JSDualDrawerViewController alloc] initWithNumberOfDrawers:JSDualDrawerNumberOfDrawersTwo openDirection:JSDualDrawerOpenDrawerDirectionFromSide];
     
     UIViewController *firstVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
     UIViewController *secondVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"SecondViewController"];

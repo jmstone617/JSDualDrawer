@@ -60,6 +60,17 @@
     return instance;
 }
 
+- (id)initWithNumberOfDrawers:(JSDualDrawerNumberOfDrawers)numberOfDrawers openDirection:(JSDualDrawerOpenDrawerDirection)openDirection {
+    self = [super init];
+    
+    if (self) {
+        _numberOfDrawers = numberOfDrawers;
+        _openDrawerDirection = openDirection;
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -73,14 +84,16 @@
     
     [self.view addSubview:self.leftTableView];
     
-    self.rightTableView = [[UITableView alloc] initWithFrame:CGRectMake(35, 0, 285, self.view.frame.size.height) style:UITableViewStylePlain];
-    [self.rightTableView setDelegate:self];
-    [self.rightTableView setDataSource:self];
-    
-    [self.rightTableView.layer setCornerRadius:6.0];
-    [self.rightTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"RightCell"];
-    
-    [self.view addSubview:self.rightTableView];
+    if (self.numberOfDrawers == JSDualDrawerNumberOfDrawersTwo) {
+        self.rightTableView = [[UITableView alloc] initWithFrame:CGRectMake(35, 0, 285, self.view.frame.size.height) style:UITableViewStylePlain];
+        [self.rightTableView setDelegate:self];
+        [self.rightTableView setDataSource:self];
+        
+        [self.rightTableView.layer setCornerRadius:6.0];
+        [self.rightTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"RightCell"];
+        
+        [self.view addSubview:self.rightTableView];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,11 +118,14 @@
     self.currentNavigationController = navController;
     
     UIBarButtonItem *leftNavItem = [[UIBarButtonItem alloc] initWithTitle:@"Left" style:UIBarButtonItemStylePlain target:self action:@selector(leftButtonPressed:)];
-    UIBarButtonItem *rightNavItem = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStylePlain target:self action:@selector(rightButtonPressed:)];
     
     UINavigationItem *item = self.currentNavigationController.navigationBar.items[0];
     [item setLeftBarButtonItem:leftNavItem];
-    [item setRightBarButtonItem:rightNavItem];
+    
+    if (self.numberOfDrawers == JSDualDrawerNumberOfDrawersTwo) {
+        UIBarButtonItem *rightNavItem = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStylePlain target:self action:@selector(rightButtonPressed:)];
+        [item setRightBarButtonItem:rightNavItem];
+    }
     
     self.topViewController = self.currentNavigationController.topViewController;
 }
@@ -144,7 +160,26 @@
         CGPathRelease(path);
         
         [UIView animateWithDuration:0.3 animations:^{
-            [self.currentNavigationController.view setFrame:CGRectMake(homeBaseFrame.origin.x + kOpenDrawerOffset, homeBaseFrame.origin.y, homeBaseFrame.size.width, homeBaseFrame.size.height)];
+            switch (self.openDrawerDirection) {
+                case JSDualDrawerOpenDrawerDirectionFromSide: {
+                    [self.currentNavigationController.view setFrame:CGRectMake(homeBaseFrame.origin.x + kOpenDrawerOffset, homeBaseFrame.origin.y, homeBaseFrame.size.width, homeBaseFrame.size.height)];
+                    
+                    break;
+                }
+                case JSDualDrawerOpenDrawerDirectionFromTop: {
+                    [self.currentNavigationController.view setFrame:CGRectMake(0, homeBaseFrame.origin.y + (homeBaseFrame.size.height - 40), homeBaseFrame.size.width, homeBaseFrame.size.height)];
+                    
+                    break;
+                }
+                case JSDualDrawerOpenDrawerDirectionFromBottom: {
+                    [self.currentNavigationController.view setFrame:CGRectMake(0, homeBaseFrame.origin.y - (homeBaseFrame.size.height - 40), homeBaseFrame.size.width, homeBaseFrame.size.height)];
+                    
+                    break;
+                }
+                default:
+                    break;
+            }
+            
         }];
     }
     else {
@@ -250,8 +285,25 @@
     [item setRightBarButtonItem:rightNavItem];
     
     [UIView animateWithDuration:0.2 animations:^{
-        [oldViewController.view setFrame:CGRectMake(320, 0, 320, oldViewController.view.frame.size.height)];
-        
+        switch (self.openDrawerDirection) {
+            case JSDualDrawerOpenDrawerDirectionFromSide: {
+                [oldViewController.view setFrame:CGRectMake(320, 0, 320, oldViewController.view.frame.size.height)];
+                
+                break;
+            }
+            case JSDualDrawerOpenDrawerDirectionFromTop: {
+                [oldViewController.view setFrame:CGRectMake(0, self.view.frame.size.height, 320, oldViewController.view.frame.size.height)];
+                
+                break;
+            }
+            case JSDualDrawerOpenDrawerDirectionFromBottom: {
+                [oldViewController.view setFrame:CGRectMake(0, -self.view.frame.size.height, 320, oldViewController.view.frame.size.height)];
+                
+                break;
+            }
+            default:
+                break;
+        }
     } completion:^(BOOL finished) {
         [oldViewController.view removeFromSuperview];
         
@@ -270,10 +322,18 @@
         } completion:^(BOOL finished) {
             self.currentNavigationController = navController;
             self.topViewController = self.currentNavigationController.topViewController;
-            
+            [navController didMoveToParentViewController:self];
             self.leftDrawerShowing = NO;
         }];
     }];
+}
+
+@end
+
+@implementation UIViewController (JSDualDrawerViewController)
+
+- (JSDualDrawerViewController *)dualDrawerController {
+    return (JSDualDrawerViewController *)self.parentViewController.parentViewController;
 }
 
 @end
