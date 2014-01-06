@@ -5,11 +5,11 @@ A dual drawer containment view controller similar to Facebook or Path
 
 JSDualDrawer is very simple to use! See the Xcode project for an example. The gist is as follows:
 
-Initialize `JSDualDrawerContainerViewController` using the singleton class method:
+Initialize `JSDualDrawerContainerViewController` using the default init method:
 
-    JSDualDrawerViewController *containerVC = [JSDualDrawerViewController sharedDrawerController];
+    JSDualDrawerViewController *containerVC = [[JSDualDrawerViewController alloc] initWithNumberOfDrawers:JSDualDrawerNumberOfDrawersTwo openDirection:JSDualDrawerOpenDrawerDirectionFromSide];
 
-Then, as you would with a `UITabBarController`, initialize your view controllers and add them to the drawer view controller:
+JSDualDrawerViewController supports opening from the side (default), top, and bottom. Then, as you would with a `UITabBarController`, initialize your view controllers and add them to the drawer view controller:
 
 ```objc
 UIViewController *firstVC = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
@@ -30,4 +30,4 @@ The left drawer is intended to be used for navigation between view controllers. 
 
 The right drawer is intended to be used to filter the content in the current view controller.
 
-I will probably continue working on this to make it a little more modular, but I wanted to make sure I got this up for the big Objective-C GitHub day! Enjoy!
+Please feel free to fork and contribute!
