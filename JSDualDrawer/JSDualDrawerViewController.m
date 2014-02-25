@@ -37,6 +37,7 @@
 
 @interface JSDualDrawerViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray *navigationControllers;
 @property (nonatomic, strong) UINavigationController *currentNavigationController;
 @property (nonatomic, strong, readwrite) NSArray *viewControllers;
 @property (nonatomic, strong) UITableView *leftTableView;
@@ -109,6 +110,14 @@
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:initialViewController];
     [navController.view setClipsToBounds:NO];
+    
+    // Add this navigation controller and NSNulls for the rest
+    self.navigationControllers = [NSMutableArray array];
+    [self.navigationControllers addObject:navController];
+    
+    for (NSInteger i = 1; i < [viewControllers count]; i++) {
+        [self.navigationControllers insertObject:[NSNull null] atIndex:i];
+    }
     
     [self addChildViewController:navController];
     [navController didMoveToParentViewController:self];
@@ -259,8 +268,17 @@
         UIViewController *newVC = self.viewControllers[indexPath.row];
         UIViewController *oldVC = self.currentNavigationController;
         
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:newVC];
-        [navController.view setClipsToBounds:NO];
+        // First try and get a navigation controller out of the array
+        UINavigationController *navController = nil;
+        if ([self.navigationControllers[indexPath.row] isKindOfClass:[UINavigationController class]]) {
+            navController = self.navigationControllers[indexPath.row];
+        }
+        else {
+            navController = [[UINavigationController alloc] initWithRootViewController:newVC];
+            [navController.view setClipsToBounds:NO];
+            
+            [self.navigationControllers replaceObjectAtIndex:indexPath.row withObject:navController];
+        }
         
         [self transitionFromViewController:oldVC toViewController:navController];
     }
@@ -278,11 +296,14 @@
     [navController.view setFrame:oldViewController.view.frame];
     
     UIBarButtonItem *leftNavItem = [[UIBarButtonItem alloc] initWithTitle:@"Left" style:UIBarButtonItemStylePlain target:self action:@selector(leftButtonPressed:)];
-    UIBarButtonItem *rightNavItem = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStylePlain target:self action:@selector(rightButtonPressed:)];
     
     UINavigationItem *item = navController.navigationBar.items[0];
     [item setLeftBarButtonItem:leftNavItem];
-    [item setRightBarButtonItem:rightNavItem];
+    
+    if (self.numberOfDrawers == JSDualDrawerNumberOfDrawersTwo) {
+        UIBarButtonItem *rightNavItem = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStylePlain target:self action:@selector(rightButtonPressed:)];
+        [item setRightBarButtonItem:rightNavItem];
+    }
     
     [UIView animateWithDuration:0.2 animations:^{
         switch (self.openDrawerDirection) {
@@ -335,5 +356,7 @@
 - (JSDualDrawerViewController *)dualDrawerController {
     return (JSDualDrawerViewController *)self.parentViewController.parentViewController;
 }
+
+- (IBAction)pop:(UIStoryboardSegue *)sender { }
 
 @end

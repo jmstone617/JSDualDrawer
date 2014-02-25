@@ -59,5 +59,6 @@ typedef NS_ENUM(NSUInteger, JSDualDrawerOpenDrawerDirection) {
 @interface UIViewController (JSDualDrawerViewController)
 
 - (JSDualDrawerViewController *)dualDrawerController;
+- (IBAction)pop:(UIStoryboardSegue *)sender;
 
 @end
